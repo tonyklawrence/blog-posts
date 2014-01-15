@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="test">
+  <import file="build/shavenmaven.xml"/>
+
+  <path id="lib.runtime">
+    <fileset dir="lib/runtime" includes="*.jar"/>
+  </path>
+
+  <path id="lib.test">
+    <path refid="lib.runtime"/>
+    <fileset dir="lib/test" includes="*.jar"/>
+  </path>
+
+  <target name="clean" description="Removes all generated files">
+    <delete dir="build/classes"/>
+    <delete dir="lib"/>
+  </target>
+
+  <target name="compile" description="Compile main and test code">
+    <mkdir dir="build/classes/main"/>
+    <javac srcdir="src/main/java" destdir="build/classes/main" classpathref="lib.runtime" includeantruntime="false"/>
+  </target>
+
+  <target name="test" description="Run all tests" depends="compile"/>
+
+  <target name="run" description="Run the application" depends="compile">
+    <java fork="true" classname="Main">
+      <classpath>
+        <pathelement path="build/classes/main"/>
+        <path refid="lib.runtime"/>
+      </classpath>
+    </java>
+  </target>
+  
+  <target name="update-dependencies" description="Updates all dependent libraries">
+    <update dependencies="build" directory="lib"/>
+  </target>
+</project>

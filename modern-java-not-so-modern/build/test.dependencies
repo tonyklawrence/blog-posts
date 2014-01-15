@@ -1,0 +1,4 @@
+mvn:junit:junit:jar|sources:4.11
+mvn:org.jmock:jmock:jar|sources:2.6.0
+mvn:org.hamcrest:hamcrest-core:jar|sources:1.3
+mvn://repo.bodar.com/com.googlecode.yatspec:yatspec:jar|sources:210
